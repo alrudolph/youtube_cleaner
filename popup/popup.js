@@ -1,6 +1,6 @@
 $(() => {
 
-    const applyCheck = (which, checked) => {
+    const applyChange = (which, checked) => {
         // save settings:
         chrome.storage.sync.set({ [which]: checked });
 
@@ -10,17 +10,20 @@ $(() => {
         });
     };
     
+    /*
+        Check box inputs:
+    */
 
     $('input#sidebar').on('change', function() {
-        applyCheck("sidebar", this.checked);
+        applyChange("sidebar", this.checked);
     });
 
     $('input#meta').on('change', function() {
-        applyCheck("meta", this.checked);
+        applyChange("meta", this.checked);
     });
 
     $('input#merch').on('change', function() {
-        applyCheck("merch", this.checked);
+        applyChange("merch", this.checked);
     });
 
     /*

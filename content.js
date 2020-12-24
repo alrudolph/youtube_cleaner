@@ -28,6 +28,7 @@ $(() => {
     /*
         Load saved settings:
     */
+
     const getState = (which, callback) => {
         chrome.storage.sync.get(which, callback)
     }
@@ -49,8 +50,6 @@ $(() => {
     */
 
     chrome.runtime.onMessage.addListener(msg => {
-        console.log(msg);
-
         switch (msg.which) {
             case 'sidebar': {
                 removeSidebar(msg.checked);
