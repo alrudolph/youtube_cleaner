@@ -2,7 +2,7 @@
     "manifest_version": 2,
     "name": "Youtube Cleaner",
     "version": "0.1",
-    "permissions": ["tabs", "*://*.youtube.com/*", "storage"],
+    "permissions": ["*://*.youtube.com/*", "storage"],
     "content_scripts": [
         {
             "matches": ["*://*.youtube.com/*"],
