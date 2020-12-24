@@ -1,5 +1,9 @@
 $(() => {
 
+    /*
+        Toggle elements on/off:
+    */
+
     const toggle = (elem, state) => {
         if (state) {
             $(elem).hide();
@@ -21,34 +25,43 @@ $(() => {
         toggle('ytd-metadata-row-container-renderer', state);
     }
     
-    // Remove on start up
-    removeSidebar(true);
-    removeMerch(true);
-    removeMeta(true);
+    /*
+        Load saved settings:
+    */
+    const getState = (which, callback) => {
+        chrome.storage.sync.get(which, callback)
+    }
 
-    chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
+    getState('sidebar', ({sidebar}) => {
+        removeSidebar(sidebar);
+    });
+
+    getState('merch', ({merch}) => {
+        removeMerch(merch);
+    });
+
+    getState('meta', ({meta}) => {
+        removeMeta(meta);
+    });
+
+    /*
+        Listen to popup:
+    */
+
+    chrome.runtime.onMessage.addListener(msg => {
+        console.log(msg);
+
         switch (msg.which) {
-            // popup requesting status
-            case 'status': {
-                sendResponse({
-                    sidebar: $('#secondary').is(':hidden'),
-                    merch: $('#merch-shelf').is(':hidden'),
-                    meta: $('ytd-metadata-row-container-renderer').is(':hidden') 
-                });
-            } break;
-            // popup clicked sidebar
             case 'sidebar': {
                 removeSidebar(msg.checked);
             } break;
-            // popup clicked merch
             case 'merch': {
                 removeMerch(msg.checked);
             } break;
-            // popup clicked meta
             case 'meta': {
                 removeMeta(msg.checked);
             } break;
         }
     });
-    
+
 });

@@ -1,41 +1,49 @@
 $(() => {
 
-    const applyCheck = msg => {
+    const applyCheck = (which, checked) => {
+        // save settings:
+        chrome.storage.sync.set({ [which]: checked });
+
+        // tell content.js to update:
         chrome.tabs.query({active: true, currentWindow: true}, tabs => {
-            chrome.tabs.sendMessage(tabs[0].id, msg);
+            chrome.tabs.sendMessage(tabs[0].id, {which, checked});
         });
     };
     
+
     $('input#sidebar').on('change', function() {
-        applyCheck({
-            which: "sidebar",
-            checked: this.checked
-        });
+        applyCheck("sidebar", this.checked);
     });
 
     $('input#meta').on('change', function() {
-        applyCheck({
-            which: "meta",
-            checked: this.checked
-        });
+        applyCheck("meta", this.checked);
     });
 
     $('input#merch').on('change', function() {
-        applyCheck({
-            which: "merch",
-            checked: this.checked
-        });
+        applyCheck("merch", this.checked);
     });
 
-    // Get status of elements from content.js
-    chrome.tabs.query({active: true, currentWindow: true}, tabs => {
-        chrome.tabs.sendMessage(tabs[0].id, { which: 'status' }, states => {
-            if (states) {
-                $('input#sidebar')[0].checked = states.sidebar;
-                $('input#merch')[0].checked = states.merch;
-                $('input#meta')[0].checked = states.meta;
-            }
-        });
+    /*
+        Load saved settings:
+    */
+
+    const getState = (which, callback) => {
+        chrome.storage.sync.get(which, callback)
+    }
+    
+    getState('sidebar', ({sidebar}) => {
+        $('input#sidebar')[0].checked = sidebar;
+        applyCheck('sidebar', sidebar);
+    });
+
+    getState('merch', ({merch}) => {
+        $('input#merch')[0].checked = merch;
+        applyCheck('merch', merch);
+    });
+
+    getState('meta', ({meta}) => {
+        $('input#meta')[0].checked = meta;
+        applyCheck('meta', meta);
     });
 
 });
