@@ -36,17 +36,17 @@ $(() => {
     
     getState('sidebar', ({sidebar}) => {
         $('input#sidebar')[0].checked = sidebar;
-        applyCheck('sidebar', sidebar);
+        applyChange('sidebar', sidebar);
     });
 
     getState('merch', ({merch}) => {
         $('input#merch')[0].checked = merch;
-        applyCheck('merch', merch);
+        applyChange('merch', merch);
     });
 
     getState('meta', ({meta}) => {
         $('input#meta')[0].checked = meta;
-        applyCheck('meta', meta);
+        applyChange('meta', meta);
     });
 
 });
