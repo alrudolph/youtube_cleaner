@@ -7,6 +7,6 @@ Chrome extension that adds a pop up menu to:
 
 As shown below:
 
-![screenshot](./screehsnohts/screenshot.png)
+![screenshot](./screenshots/screenshot.png)
 
 View on the google chrome store: [Chrome Store](https://chrome.google.com/webstore/detail/youtube-cleaner/epiiddlghdnjelpmlmafcdnfndlpmgac?hl=en)
