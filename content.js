@@ -33,15 +33,15 @@ $(() => {
         chrome.storage.sync.get(which, callback)
     }
 
-    getState('sidebar', ({sidebar}) => {
+    getState('sidebar', ({ sidebar }) => {
         removeSidebar(sidebar);
     });
 
-    getState('merch', ({merch}) => {
+    getState('merch', ({ merch }) => {
         removeMerch(merch);
     });
 
-    getState('meta', ({meta}) => {
+    getState('meta', ({ meta }) => {
         removeMeta(meta);
     });
 

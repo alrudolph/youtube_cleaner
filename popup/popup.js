@@ -34,17 +34,17 @@ $(() => {
         chrome.storage.sync.get(which, callback)
     }
     
-    getState('sidebar', ({sidebar}) => {
+    getState('sidebar', ({ sidebar }) => {
         $('input#sidebar')[0].checked = sidebar;
         applyChange('sidebar', sidebar);
     });
 
-    getState('merch', ({merch}) => {
+    getState('merch', ({ merch }) => {
         $('input#merch')[0].checked = merch;
         applyChange('merch', merch);
     });
 
-    getState('meta', ({meta}) => {
+    getState('meta', ({ meta }) => {
         $('input#meta')[0].checked = meta;
         applyChange('meta', meta);
     });
